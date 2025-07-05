@@ -1,0 +1,109 @@
+Listado de rutas de carpetas
+El n£mero de serie del volumen es C0ED-FE58
+C:.
+³   .classpath
+³   .factorypath
+³   .gitattributes
+³   .gitignore
+³   .project
+³   estructura.txt
+³   HELP.md
+³   mvnw
+³   mvnw.cmd
+³   pom.xml
+³   
+ÃÄÄÄ.mvn
+³   ÀÄÄÄwrapper
+³           maven-wrapper.properties
+³           
+ÃÄÄÄ.settings
+³       org.eclipse.core.resources.prefs
+³       org.eclipse.jdt.apt.core.prefs
+³       org.eclipse.jdt.core.prefs
+³       org.springframework.ide.eclipse.prefs
+³       
+ÃÄÄÄsrc
+³   ÃÄÄÄmain
+³   ³   ÃÄÄÄjava
+³   ³   ³   ÀÄÄÄcom
+³   ³   ³       ÀÄÄÄmx
+³   ³   ³           ÀÄÄÄMsInventario
+³   ³   ³               ³   MsInventarioApplication.java
+³   ³   ³               ³   
+³   ³   ³               ÃÄÄÄconfiguracion
+³   ³   ³               ³       Autentificacion.java
+³   ³   ³               ³       
+³   ³   ³               ÃÄÄÄController
+³   ³   ³               ³       ProductosWeb.java
+³   ³   ³               ³       
+³   ³   ³               ÃÄÄÄDao
+³   ³   ³               ³       ProductoDao.java
+³   ³   ³               ³       
+³   ³   ³               ÃÄÄÄexcepciones
+³   ³   ³               ³       ExceptionGlobal.java
+³   ³   ³               ³       RecursoNoEncontrado.java
+³   ³   ³               ³       
+³   ³   ³               ÃÄÄÄModel
+³   ³   ³               ³       Productos.java
+³   ³   ³               ³       
+³   ³   ³               ÀÄÄÄService
+³   ³   ³                       ProductosSerImp.java
+³   ³   ³                       
+³   ³   ÀÄÄÄresources
+³   ³       ³   application.properties
+³   ³       ³   
+³   ³       ÃÄÄÄstatic
+³   ³       ÀÄÄÄtemplates
+³   ÀÄÄÄtest
+³       ÀÄÄÄjava
+³           ÀÄÄÄcom
+³               ÀÄÄÄmx
+³                   ÀÄÄÄMsInventario
+³                           MsInventarioApplicationTests.java
+³                           Pruebas.java
+³                           
+ÀÄÄÄtarget
+    ÃÄÄÄclasses
+    ³   ³   application.properties
+    ³   ³   
+    ³   ÀÄÄÄcom
+    ³       ÀÄÄÄmx
+    ³           ÀÄÄÄMsInventario
+    ³               ³   MsInventarioApplication.class
+    ³               ³   
+    ³               ÃÄÄÄconfiguracion
+    ³               ³       Autentificacion.class
+    ³               ³       
+    ³               ÃÄÄÄController
+    ³               ³       ProductosWeb.class
+    ³               ³       
+    ³               ÃÄÄÄDao
+    ³               ³       ProductoDao.class
+    ³               ³       
+    ³               ÃÄÄÄexcepciones
+    ³               ³       ExceptionGlobal.class
+    ³               ³       RecursoNoEncontrado.class
+    ³               ³       
+    ³               ÃÄÄÄModel
+    ³               ³       Productos.class
+    ³               ³       
+    ³               ÀÄÄÄService
+    ³                       ProductosSerImp.class
+    ³                       
+    ÃÄÄÄgenerated-sources
+    ³   ÀÄÄÄannotations
+    ÃÄÄÄgenerated-test-sources
+    ³   ÀÄÄÄtest-annotations
+    ÃÄÄÄmaven-status
+    ³   ÀÄÄÄmaven-compiler-plugin
+    ³       ÃÄÄÄcompile
+    ³       ³   ÀÄÄÄdefault-compile
+    ³       ³           createdFiles.lst
+    ³       ³           inputFiles.lst
+    ³       ³           
+    ³       ÀÄÄÄtestCompile
+    ³           ÀÄÄÄdefault-testCompile
+    ³                   createdFiles.lst
+    ³                   inputFiles.lst
+    ³                   
+    ÀÄÄÄtest-classes
