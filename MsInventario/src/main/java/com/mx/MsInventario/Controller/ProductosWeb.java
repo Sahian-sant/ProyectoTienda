@@ -11,7 +11,6 @@ import org.springframework.web.client.RestTemplate;
 import com.mx.MsInventario.Model.Productos;
 import com.mx.MsInventario.Service.ProductosSerImp;
 
-
 @RestController
 @RequestMapping(path = "ProductosWs")
 @CrossOrigin
@@ -40,12 +39,23 @@ public class ProductosWeb {
         return productosSerImp.buscarProductosXtiendaid(idTienda);
     }
     
+    @PutMapping("/{idProducto}")
+    public ResponseEntity<Productos> actualizar(@PathVariable Long idProducto, @RequestBody Productos producto) {
+        Productos actualizado = productosSerImp.actualizar(idProducto, producto);
+        return ResponseEntity.ok(actualizado);
+    }
+
+    @DeleteMapping("/{idProducto}")
+    public ResponseEntity<Void> eliminar(@PathVariable Long idProducto) {
+        productosSerImp.eliminar(idProducto);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/externo")
     public String obtenerApiExterna() {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://jsonplaceholder.typicode.com/posts/1";
         return restTemplate.getForObject(url, String.class);
     }
-
 }
 

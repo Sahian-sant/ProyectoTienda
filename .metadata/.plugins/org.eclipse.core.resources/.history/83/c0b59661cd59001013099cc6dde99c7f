@@ -1,0 +1,5 @@
+package com.mx.MsInventario.Service;
+
+public interface Inteservice {
+
+}
