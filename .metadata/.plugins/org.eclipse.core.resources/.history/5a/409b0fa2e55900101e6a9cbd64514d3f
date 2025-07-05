@@ -1,0 +1,20 @@
+# Nombre de la aplicación API Gateway
+spring.application.name=ApiGateway
+
+# PUERTO DEL SERVIDOR
+server.port=9000
+
+# CONFIGURACION DEL DISCOVERY SERVER
+# SE HABILITA EL REGISTRO CENTRALIZADO / CONEXION
+spring.cloud.gateway.discovery.locator.enabled=true
+
+# CONFIGURACION DE LOS MICROSERVICIOS QUE SE REGISTRARAN EN EL API-GATEWAY
+
+# 1---NOMBRE DEL MS O API ---- EJEMPLO: MS-TIENDA
+spring.cloud.gateway.routes[0].id=MS-TIENDA
+
+# 2---LA RUTA DE NUESTRO MS ---- O LA URL DEL SERVIDOR LOCAL
+spring.cloud.gateway.routes[0].uri=http://localhost:8030
+
+# 3---PREDICADO DE LA API O MS --- predicates[0] este siempre va en 0 --- NOS OBTIENEN LAS SENTENCIAS DE CODIGO SQL PARA LA BD
+spring.cloud.gateway.routes[0].predicates[0]=Path=/TiendasW/**
