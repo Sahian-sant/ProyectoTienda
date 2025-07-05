@@ -1,0 +1,44 @@
+package com.mx.MsInventario.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.mx.MsInventario.Dao.ProductoDao;
+import com.mx.MsInventario.Model.Productos;
+import com.mx.MsInventario.excepciones.RecursoNoEncontrado;
+
+@Service
+public class ProductosSerImp {
+
+	@Autowired
+	ProductoDao productoDao;
+	
+	@Transactional(readOnly = true)
+	public List<Productos>mostrar(){
+		return (List<Productos>)productoDao.findAll();
+		
+	}
+	
+	@Transactional
+	public Productos guardar (Productos producto) {
+		return productoDao.save(producto);
+	}
+	
+	@Transactional(readOnly = true)
+	public Productos buscarXid(Long idProducto) {
+	    return productoDao.findById(idProducto)
+	            .orElseThrow(() -> new RecursoNoEncontrado("Producto no encontrado"));
+	}
+
+	
+
+	@Transactional (readOnly = true)
+	public List<Productos> buscarProductosXtiendaid (Long idTienda){
+		return productoDao.findByIdTienda(idTienda);
+	}
+	
+}
+

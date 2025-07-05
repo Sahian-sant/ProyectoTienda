@@ -1,0 +1,35 @@
+package com.mx.MsInventario.Service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mx.MsInventario.Model.Productos;
+import com.mx.MsInventario.excepciones.RecursoNoEncontrado;
+
+@SpringBootTest
+class ProductosServiceTest {
+
+  @Autowired
+  private ProductosSerImp service;
+
+  @Test
+  void contextLoads() {
+    // Confirma que el contexto se carga sin fallas
+  }
+
+  @Test
+  void guardarProducto() {
+    Productos producto = new Productos();
+    producto.setNombre("Mouse");
+    producto.setPrecio(250f);
+    producto.setStock(10);
+    producto.setIdTienda(1L);
+
+    Productos guardado = service.guardar(producto);
+    assertNotNull(guardado.getIdProducto());
+  }
+
+  @Test
+  void buscarProductoNoExistente() {
+    assertThrows(RecursoNoEncontrado.class, () -> service.buscarXid(999L));
+  }
+}

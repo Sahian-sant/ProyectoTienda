@@ -1,0 +1,39 @@
+package com.mx.MsVentas.Service;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import com.mx.MsVentas.service.ClientesServImp;
+
+import com.mx.MsVentas.Dao.VentasDao;
+import com.mx.MsVentas.model.ClientesB;
+
+@Service
+public class clientesServImp {
+
+    @Autowired
+    private VentasDao ventasDao;
+
+    @Transactional(readOnly = true)
+    public List<ClientesB> mostrar() {
+        return ventasDao.findAll();
+    }
+
+    @Transactional
+    public ClientesB guardar(ClientesB cliente) {
+        return ventasDao.save(cliente);
+    }
+
+    @Transactional(readOnly = true)
+    public ClientesB buscarPorId(Integer idProd) {
+        return ventasDao.findById(idProd).orElse(null); 
+    }
+
+    @Transactional(readOnly = true)
+    public List<ClientesB> buscarPorTienda(Integer idTienda) {
+        return ventasDao.findByIdTienda(idTienda);
+    }
+}

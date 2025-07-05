@@ -1,0 +1,5 @@
+package com.mx.MsVentas.Dao;
+
+public interface VentasDao {
+
+}

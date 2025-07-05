@@ -1,0 +1,52 @@
+package com.mx.MsVentas.Controller;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.mx.MsVentas.service.ClientesServImp;
+
+
+
+@RestController
+@RequestMapping(path = "ClientesWs")
+@CrossOrigin
+public class ClientesWS {
+
+    @Autowired
+    ClientesServImp clientesServImp;
+
+    // Crear un nuevo cliente
+    @PostMapping
+    public ResponseEntity<Clientes> guardar(@RequestBody Clientes cliente) {
+        return new ResponseEntity<>(clientesServImp.guardar(cliente), HttpStatus.CREATED);
+    }
+
+    // Obtener todos los clientes
+    @GetMapping
+    public List<ClientesB> mostrar() {
+        return clientesServImp.mostrar();
+    }
+
+    // Buscar cliente por id
+    @GetMapping(path = "/{idProd}")
+    public Clientes buscarXid(@PathVariable("idProd") Integer idProd) {
+        return clientesServImp.buscarPorId(idProd);
+    }
+
+    // Buscar clientes por idTienda
+    @GetMapping(path = "/tienda/{idTienda}")
+    public List<ClientesB> buscarClientesXidTienda(@PathVariable("idTienda") Integer idTienda) {
+        return clientesServImp.buscarPorTienda(idTienda);
+    }
+}

@@ -1,0 +1,5 @@
+package com.mx.MsTienda.Exepciones;
+
+public class ExceptionGlobal {
+
+}
