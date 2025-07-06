@@ -1,0 +1,16 @@
+package com.mx.MsTienda.service;
+
+import java.util.List;
+import com.mx.MsTienda.dto.ProductosDTO;
+import com.mx.MsTienda.entity.Tiendas;
+
+public interface InterfazdeServicio {
+    List<Tiendas> mostrar();
+    Tiendas guardar(Tiendas tienda);
+    List<ProductosDTO> lbuscarProductosXtiendaid(Long idTienda);
+    ProductosDTO guardarProductos(ProductosDTO producto);
+    List<Tiendas> buscarTiendasSP(String nombre);
+    List<Tiendas> filtrarTiendasPorNombre(String texto);
+    Tiendas actualizar(Long idTienda, Tiendas tienda);
+    void eliminar(Long idTienda);
+}

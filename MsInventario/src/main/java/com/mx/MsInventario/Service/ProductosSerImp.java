@@ -1,6 +1,7 @@
 package com.mx.MsInventario.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,12 @@ public class ProductosSerImp implements Interfazservice  {
                 .orElseThrow(() -> new RecursoNoEncontrado("Producto no encontrado"));
         productoDao.delete(producto);
     }
+    
+    // método que usa lambda para filtrar productos por precio máximo
+    public List<Productos> filtrarPorPrecioMax(float precioMax) {
+        return mostrar().stream()
+            .filter(p -> p.getPrecio() != null && p.getPrecio() <= precioMax)
+            .collect(Collectors.toList());
+    }
 }
-
 

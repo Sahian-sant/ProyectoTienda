@@ -1,0 +1,39 @@
+package com.mx.MsTienda.entity;
+
+import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedStoredProcedureQuery;
+import jakarta.persistence.ParameterMode;
+import jakarta.persistence.StoredProcedureParameter;
+import jakarta.persistence.Table;
+
+import lombok.Data;
+
+@NamedStoredProcedureQuery(
+    name = "Tiendas.buscarPorNombre", // Este es el alias usado en el repositorio
+    procedureName = "SP_BUSCAR_TIENDA_NOMBRE", // Nombre real del procedimiento en Oracle
+    parameters = {
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "C_RESULTADO", type = void.class)
+    },
+    resultClasses = Tiendas.class
+)
+@Entity
+@Table(name = "TIENDAS_BOD") // ← aquí lo corregí al nombre real de tu tabla
+@Data
+public class Tiendas {
+
+    @Id
+    @Column(name = "ID_TIENDA")
+    private Long idTienda;
+
+    @Column(name = "NOMBRE")
+    private String nombre;
+
+    @Column(name = "FECHA_APERTURA")
+    private Date fechaApertura;
+
+}

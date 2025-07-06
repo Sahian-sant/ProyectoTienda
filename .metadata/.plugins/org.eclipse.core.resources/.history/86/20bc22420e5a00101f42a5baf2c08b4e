@@ -1,0 +1,62 @@
+package com.mx.MsTienda.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.mx.MsTienda.Repository.TiendasRepository;
+import com.mx.MsTienda.dto.ProductosDTO;
+import com.mx.MsTienda.entity.Tiendas;
+import com.mx.MsTienda.feingClientInventario.IfeingClientInventario;
+
+import jakarta.transaction.Transactional;
+@SuppressWarnings("unchecked")
+@Service
+public class TiendasSerImp {
+
+    @Autowired
+    TiendasRepository tiendasRepository;
+
+    @Transactional
+    public List<Tiendas> mostrar() {
+        return tiendasRepository.findAll();
+    }
+    @Transactional
+    public Tiendas guardar(Tiendas tienda) {
+    	return tiendasRepository.save(tienda);
+    }
+    
+    //Metodos propios del ms-inventario--------------------
+    //Para realizar la comunicacion de los microservicios de puede realizar de 
+    //dos formas
+    /*1.-RestTemplate
+     * 2.-OpenFeigClient---cliente fingido*/
+    
+    
+ 
+    
+    @Autowired
+    RestTemplate  restTemplate;
+    	
+	
+    public List<ProductosDTO> lbuscarProductosXtiendaid(Long idTienda) {
+    	//Como comunicar con RestTemplate;urlServidorLocal/pathClase/pathMetodo
+        List<ProductosDTO>registrosBd=restTemplate.getForObject("http://localhost:8031/ProductosWs/productos/" + idTienda,List.class);
+        return registrosBd;
+    }
+    
+
+    
+    @Autowired
+    IfeingClientInventario ifeingClientInventario;
+    
+    @Transactional
+    public ProductosDTO guardarProductos(ProductosDTO producto) {
+    	return ifeingClientInventario.guardar(producto);
+    }
+    
+    
+    
+}

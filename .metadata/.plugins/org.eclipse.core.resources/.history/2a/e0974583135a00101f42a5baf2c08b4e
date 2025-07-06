@@ -1,0 +1,32 @@
+package com.mx.MsTienda.entity;
+
+import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+@NamedStoredProcedureQuery(
+	    name = "Tiendas.obtenerTiendasPorFecha",          // Aquí es el nombre del procedimiento para JPA
+	    procedureName = "SP_TIENDAS_POR_FECHA",            // Aquí es el nombre del stored procedure en la base de datos
+	    resultClasses = Tiendas.class,                      // Resultado será mapeado a la entidad Tiendas
+	    parameters = {
+	        @StoredProcedureParameter(mode = ParameterMode.IN, name = "fecha", type = java.sql.Date.class),
+	        @StoredProcedureParameter(mode = ParameterMode.REF_CURSOR, name = "resultado", type = void.class)
+	    }
+	)
+@Entity
+@Table(name="TIENDA_BOD")
+@Data
+public class Tiendas {
+	
+	@Id
+	@Column(name="ID_TIENDA")
+	private Long idTienda;
+	@Column(name="NOMBRE")
+	private String nombre ;
+	@Column(name="FECHA_APERTURA")
+	private Date fechaApertura ;
+
+}
