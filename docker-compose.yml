@@ -4,7 +4,7 @@ services:
   # Servicio Eureka - servidor de descubrimiento
   eureka:
     build: ./EurekaServert
-    container_name: eureka
+    container_name: eureka_compose
     ports:
       - "8761:8761"  # expone el puerto de Eureka
     networks:
