@@ -1,0 +1,50 @@
+package com.mx.MsVentas.Controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.mx.MsVentas.Model.Clientes;
+import com.mx.MsVentas.Service.ClientesServImp;
+
+@RestController
+@RequestMapping(path = "ClientesWs")
+@CrossOrigin
+public class ClientesWS {
+
+    @Autowired
+    private ClientesServImp clientesServImp;
+
+    // Crear un nuevo cliente
+    @PostMapping
+    public ResponseEntity<Clientes> guardar(@RequestBody Clientes cliente) {
+        Clientes nuevoCliente = clientesServImp.guardar(cliente);
+        return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
+    }
+
+    // Obtener todos los clientes
+    @GetMapping
+    public List<Clientes> mostrar() {
+        return clientesServImp.mostrar();
+    }
+
+    // Buscar cliente por id
+    @GetMapping(path = "/{idProd}")
+    public ResponseEntity<Clientes> buscarXid(@PathVariable("idProd") Integer idProd) {
+        Clientes cliente = clientesServImp.buscarPorId(idProd);
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Buscar clientes por idTienda
+    @GetMapping(path = "/tienda/{idTienda}")
+    public List<Clientes> buscarClientesXidTienda(@PathVariable("idTienda") Integer idTienda) {
+        return clientesServImp.buscarPorTienda(idTienda);
+    }
+}

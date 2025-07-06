@@ -1,0 +1,26 @@
+package com.mx.MsVentas.Autentificacion;
+
+import java.io.IOException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+
+@Component  // Para que Spring la detecte e inyecte
+public class ErroresDeAutentificacion implements AuthenticationEntryPoint {
+
+    @Override
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) throws IOException {
+
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+        String json = String.format("{\"error\": \"Unauthorized\", \"message\": \"%s\"}",
+                authException.getMessage());
+
+        response.getOutputStream().println(json);
+    }
+}

@@ -47,4 +47,24 @@ public class ClientesWS {
     public List<Clientes> buscarClientesXidTienda(@PathVariable("idTienda") Integer idTienda) {
         return clientesServImp.buscarPorTienda(idTienda);
     }
+    
+    @PutMapping("/{idProd}")
+    public ResponseEntity<Clientes> actualizar(@PathVariable Integer idProd, @RequestBody Clientes cliente) {
+        return ResponseEntity.ok(clientesServImp.actualizar(idProd, cliente));
+    }
+
+    @DeleteMapping("/{idProd}")
+    public ResponseEntity<Void> eliminar(@PathVariable Integer idProd) {
+        clientesServImp.eliminar(idProd);
+        return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/storedprocedure")
+    public List<Clientes> obtenerClientesSP() {
+        return clientesServImp.obtenerClientesSP();
+    }
+    @GetMapping("/producto/{id}")
+    public String producto(@PathVariable Long id) {
+        return clientesServImp.obtenerProductoJson(id);
+    }
+
 }
