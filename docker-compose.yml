@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Servicio Eureka - servidor de descubrimiento
+  eureka:
+    build: ./EurekaServert
+    container_name: eureka
+    ports:
+      - "8761:8761"  # expone el puerto de Eureka
+    networks:
+      - ms-net
+
+  # API Gateway - puerta de enlace para los microservicios
+  api-gateway:
+    build: ./ApiGateway
+    container_name: api-gateway
+    ports:
+      - "8080:8080"  # expone el puerto del gateway
+    depends_on:
+      - eureka  # espera que eureka inicie primero
+    networks:
+      - ms-net
+
+  # Microservicio de Inventario
+  ms-inventario:
+    build: ./MsInventario
+    container_name: ms-inventario
+    ports:
+      - "8031:8031"  # expone su puerto
+    depends_on:
+      - eureka
+      - api-gateway
+    networks:
+      - ms-net
+
+  # Microservicio de Tiendas
+  ms-tiendas:
+    build: ./MsTiendas
+    container_name: ms-tiendas
+    ports:
+      - "8030:8030"
+    depends_on:
+      - eureka
+      - api-gateway
+    networks:
+      - ms-net
+
+  # Microservicio de Ventas
+  ms-ventas:
+    build: ./MsVentas
+    container_name: ms-ventas
+    ports:
+      - "8032:8032"
+    depends_on:
+      - eureka
+      - api-gateway
+    networks:
+      - ms-net
+
+# Red para que todos los servicios se comuniquen
+networks:
+  ms-net:
+    driver: bridge
