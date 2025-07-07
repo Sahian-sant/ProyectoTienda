@@ -42,17 +42,21 @@ public class ProductosSerImp implements Interfazservice  {
         return productoDao.findByIdTienda(idTienda);
     }
     
-    @Override
-    @Transactional
-    public Productos actualizar(Long idProducto, Productos productoActualizado) {
-        Productos producto = productoDao.findById(idProducto)
-                .orElseThrow(() -> new RecursoNoEncontrado("Producto no encontrado"));
-        producto.setNombre(productoActualizado.getNombre());
-        producto.setPrecio(productoActualizado.getPrecio());
-        producto.setStock(productoActualizado.getStock());
-        producto.setIdTienda(productoActualizado.getIdTienda());
-        return productoDao.save(producto);
-    }
+  @Override
+@Transactional
+public Productos actualizar(Long idProducto, Productos productoActualizado) {
+    Productos producto = productoDao.findById(idProducto)
+            .orElseThrow(() -> new RecursoNoEncontrado("Producto no encontrado"));
+
+    // Evita usar el ID del objeto recibido
+    producto.setNombre(productoActualizado.getNombre());
+    producto.setPrecio(productoActualizado.getPrecio());
+    producto.setStock(productoActualizado.getStock());
+    producto.setIdTienda(productoActualizado.getIdTienda());
+
+    return productoDao.saveAndFlush(producto);
+}
+
     
     @Override
     @Transactional

@@ -20,51 +20,57 @@ public class ClientesWS {
 
     // Crear un nuevo cliente
     @PostMapping
-    public ResponseEntity<Clientes> guardar(@RequestBody Clientes cliente) {
+    public ResponseEntity<?> guardar(@RequestBody Clientes cliente) {
+        if (cliente.getNombre() == null || cliente.getIdTienda() == null) {
+            return ResponseEntity.badRequest().body("Nombre e ID de tienda son obligatorios");
+        }
         Clientes nuevoCliente = clientesServImp.guardar(cliente);
         return new ResponseEntity<>(nuevoCliente, HttpStatus.CREATED);
     }
 
     // Obtener todos los clientes
     @GetMapping
-    public List<Clientes> mostrar() {
-        return clientesServImp.mostrar();
+    public ResponseEntity<List<Clientes>> mostrar() {
+        return ResponseEntity.ok(clientesServImp.mostrar());
     }
 
     // Buscar cliente por id
     @GetMapping(path = "/{idProd}")
     public ResponseEntity<Clientes> buscarXid(@PathVariable("idProd") Integer idProd) {
         Clientes cliente = clientesServImp.buscarPorId(idProd);
-        if (cliente != null) {
-            return ResponseEntity.ok(cliente);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(cliente);
     }
 
     // Buscar clientes por idTienda
     @GetMapping(path = "/tienda/{idTienda}")
-    public List<Clientes> buscarClientesXidTienda(@PathVariable("idTienda") Integer idTienda) {
-        return clientesServImp.buscarPorTienda(idTienda);
-    }
-    
-    @PutMapping("/{idProd}")
-    public ResponseEntity<Clientes> actualizar(@PathVariable Integer idProd, @RequestBody Clientes cliente) {
-        return ResponseEntity.ok(clientesServImp.actualizar(idProd, cliente));
+    public ResponseEntity<List<Clientes>> buscarClientesXidTienda(@PathVariable("idTienda") Integer idTienda) {
+        return ResponseEntity.ok(clientesServImp.buscarPorTienda(idTienda));
     }
 
+    // Actualizar cliente
+    @PutMapping("/{idProd}")
+    public ResponseEntity<Clientes> actualizar(@PathVariable Integer idProd, @RequestBody Clientes cliente) {
+        Clientes actualizado = clientesServImp.actualizar(idProd, cliente);
+        return ResponseEntity.ok(actualizado);
+    }
+
+    // Eliminar cliente
     @DeleteMapping("/{idProd}")
     public ResponseEntity<Void> eliminar(@PathVariable Integer idProd) {
         clientesServImp.eliminar(idProd);
         return ResponseEntity.noContent().build();
     }
+
+    // Obtener clientes desde stored procedure
     @GetMapping("/storedprocedure")
-    public List<Clientes> obtenerClientesSP() {
-        return clientesServImp.obtenerClientesSP();
-    }
-    @GetMapping("/producto/{id}")
-    public String producto(@PathVariable Long id) {
-        return clientesServImp.obtenerProductoJson(id);
+    public ResponseEntity<List<Clientes>> obtenerClientesSP() {
+        return ResponseEntity.ok(clientesServImp.obtenerClientesSP());
     }
 
+    // Obtener producto JSON vía REST template
+    @GetMapping("/producto/{id}")
+    public ResponseEntity<String> producto(@PathVariable Long id) {
+        String productoJson = clientesServImp.obtenerProductoJson(id);
+        return ResponseEntity.ok(productoJson);
+    }
 }

@@ -1,0 +1,127 @@
+notas para mi:
+se debe de probar cada uno para poder corregir uno por uno  (inventario funciona por el momento
+se va corrigiendo y actualizando de acuerdo a lo errores que se presentan
+
+actualizar cuando se compruebe 
+mvn clean package para actualizar el jar
+posteriormente levantarlo
+
+
+
+
+
+
+
+MsInventario
+
+Mostrar todos los productos
+http://localhost:8031/ProductosWs
+cmd 
+curl -u admin:admin123 http://localhost:8031/ProductosWs
+
+
+Buscar producto por ID
+http://localhost:8031/ProductosWs/1
+
+
+ Buscar productos por tienda
+ http://localhost:8031/ProductosWs/tienda/1
+ 
+  url paraa realizar pruebas (se estan comprobando uno por uno)
+  
+  Crear producto
+ http://localhost:8080/ProductosWs
+ 
+ curl -u admin:admin123 -X POST http://localhost:8031/ProductosWs -H "Content-Type: application/json" -d "{\"nombre\":\"ProductoNuevo\",\"precio\":250.0,\"stock\":15,\"idTienda\":1}"
+
+ Actualizar producto
+ http://localhost:8031/ProductosWs/1
+ 
+ curl -u admin:admin123 -X PUT http://localhost:8031/ProductosWs/1 -H "Content-Type: application/json" -d "{\"nombre\":\"ProductoActualizado\",\"precio\":300.0,\"stock\":20,\"idTienda\":1}"
+ 
+ Eliminar producto
+ http://localhost:8031/ProductosWs/1
+ 
+ GET
+http://localhost:8031/ProductosWs/externo
+
+
+Filtrar por precio
+http://localhost:8031/ProductosWs/filtrar/precio/{max}
+
+
+
+
+
+
+
+Mostrar todas las tiendas
+http://localhost:8030/TiendasWs
+
+Crear una nueva tienda
+
+http://localhost:8030/TiendasWs
+
+Actualizar una tienda
+
+http://localhost:8030/TiendasWs/1
+
+Eliminar tienda
+http://localhost:8030/TiendasWs/1
+
+Buscar productos de una tienda
+http://localhost:8030/TiendasWs/productos/1
+
+Guardar producto en una tienda
+
+
+http://localhost:8030/TiendasWs/guardarProducto
+
+Filtrar tiendas por nombre 
+
+http://localhost:8030/TiendasWs/filtrarPorNombre/{texto}
+
+Buscar tienda usando stored procedure
+http://localhost:8030/TiendasWs/buscarSP/{nombre}
+
+
+
+
+ Mostrar todos los clientes
+
+http://localhost:8032/ClientesWs
+
+
+Crear un nuevo cliente
+cmd
+http://localhost:8032/ClientesWs
+
+
+
+Buscar cliente por ID
+
+http://localhost:8032/ClientesWs/{idProd}
+
+Buscar clientes por tienda
+
+http://localhost:8032/ClientesWs/tienda/{idTienda}
+
+
+Actualizar cliente
+
+http://localhost:8032/ClientesWs/{idProd}
+
+Eliminar cliente
+
+http://localhost:8032/ClientesWs/1
+
+Obtener clientes desde Stored Procedure
+
+http://localhost:8032/ClientesWs/storedprocedure
+
+
+Obtener producto como JSON 
+
+http://localhost:8032/ClientesWs/producto/{id}
+
+
