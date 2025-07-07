@@ -43,8 +43,10 @@ public class TiendasSerImp implements InterfazdeServicio {
 
     @Override
     public List<ProductosDTO> lbuscarProductosXtiendaid(Long idTienda) {
-        return restTemplate.getForObject("http://localhost:8031/ProductosWs/productos/" + idTienda, List.class);
-    }
+        //return restTemplate.getForObject("http://localhost:8031/ProductosWs/productos/" + idTienda, List.class);
+    return restTemplate.getForObject("http://ms-inventario:8031/ProductosWs/productos/" + idTienda, List.class);
+
+	}
 
     @Override
     @Transactional

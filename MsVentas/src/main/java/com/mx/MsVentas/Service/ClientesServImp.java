@@ -75,7 +75,8 @@ public class ClientesServImp implements InterfaceDeServicio {
     //resttemplace
     public String obtenerProductoJson(Long id) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:8031/ProductosWs/" + id;
+        //String url = "http://localhost:8031/ProductosWs/" + id;
+		String url = "http://ms-inventario:8031/ProductosWs/" + id;
         String productoJson = restTemplate.getForObject(url, String.class);
         return productoJson;  // aquí devuelves el JSON tal cual
     }
